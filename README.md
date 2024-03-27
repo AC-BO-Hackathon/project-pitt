@@ -19,6 +19,8 @@ TBD
 
 ## Required Packages
 
+Required packages can be installed by commanding `pip install -r requirements.txt`.
+
 - [numpy](https://github.com/numpy/numpy)
 - [matplotlib](https://github.com/matplotlib/matplotlib)
 - [bayeso](https://github.com/jungtaekkim/bayeso)
