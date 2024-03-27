@@ -1,16 +1,32 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=14492997)
-# Autograding Example: Python
-This example project is written in Python, and tested with pytest.
+# Multi-Objective Bayesian Optimization for Transparent Electromagnetic Interference Shielding with Thin-Film Structures
 
-## The assignment
-The tests are failing right now because the method isn't outputting the correct string. Fixing this up will make the tests green.
+This repository is for implementing the project "Multi-Objective Bayesian Optimization for Transparent Electromagnetic Interference Shielding with Thin-Film Structures" at the [Bayesian Optimization Hackathon for Chemistry and Materials](https://ac-bo-hackathon.github.io/).
 
-## Setup command
+## Project Description
 
-See `postCreateCommand` from [`devcontainer.json`](.devcontainer/devcontainer.json).
+We investigate the problem of transparent electromagnetic interference shielding to protect electronic circuits or devices by finding an optimal nano-structure using Bayesian optimization. We parameterize a thin-film structure considering the material and thickness of each layer, and then optimize two objective functions with mulit-objective Bayesian optimization. In addition, we showcase our own transfer-matrix method package for computing the propagation of electromagnetic waves as well as our Bayesian optimization package.
 
-## Run command
-`pytest`
+## Team Members
 
-## Notes
-- pip's install path is not included in the PATH var by default, so without installing via `sudo -H`, pytest would be unaccessible.
+1. [Jungtaek Kim](https://jungtaekkim.github.io/) (University of Pittsburgh, Team Leader)
+2. Mingxuan Li (University of Pittsburgh)
+3. Oliver Hinder (University of Pittsburgh)
+4. Paul W. Leu (University of Pittsburgh)
+
+## Directory Structure
+
+TBD
+
+## Required Packages
+
+- [numpy](https://github.com/numpy/numpy)
+- [matplotlib](https://github.com/matplotlib/matplotlib)
+- [bayeso](https://github.com/jungtaekkim/bayeso)
+- [layerlumos](https://github.com/Mil152/LayerLumos/tree/main)
+
+## References
+
+- Mingxuan Li, Michael J. McCourt, Anthony J. Galante, and Paul W. Leu. Bayesian optimization of nanophotonic electromagnetic shielding with very high visible transparency. Optics Express, vol. 30, no. 18, pp. 33182-33194, 2022.
+- Jungtaek Kim and Seungjin Choi. BayesO: A Bayesian optimization framework in Python. Journal of Open Source Software, vol. 8, no. 90, p. 5320, 2023.
+- Jungtaek Kim, Mingxuan Li, Oliver Hinder, and Paul W. Leu. Datasets and benchmarks for nanophotonic structure and parametric design simulations. In Advances in Neural Information Processing Systems 36 (NeurIPS-2023), New Orleans, Louisiana, USA, December 10-16, 2023. Datasets and Benchmarks Track.
+- Jungtaek Kim, Mingxuan Li, Yirong Li, Andrés Gómez, Oliver Hinder, and Paul W. Leu. Multi-BOWS: Multi-fidelity multi-objective Bayesian optimization with warm starts for nanophotonic structure design. Digital Discovery, vol. 3, no. 2, pp. 381-391, 2024.
