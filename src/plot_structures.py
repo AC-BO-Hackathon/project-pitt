@@ -30,7 +30,7 @@ def get_color(material):
     elif material == 'W':
         str_color = 'orange'
     elif material == 'TiO2':
-        str_color = 'lawngreen'
+        str_color = 'blue'
     elif material == 'TiN':
         str_color = 'darkgreen'
     elif material == 'Al2O3':
