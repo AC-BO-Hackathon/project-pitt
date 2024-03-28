@@ -15,15 +15,15 @@ We investigate the problem of transparent electromagnetic interference shielding
 
 ## Brief Code Description
 
-- `constants.py`
-- `optimize_structures.py`
-- `plot_structures.py`
-- `mobo.py`
-- `plot_bayesian_optimization.py`
-- `objective.py`
-- `plot_pareto_frontiers.py`
-- `radio_frequency.py`
-- `visible_light.py`
+- `constants.py`: Declaring constants
+- `optimize_structures.py`: Optimizing thin-film structures using multi-objective Bayesian optimization
+- `plot_structures.py`: Plotting thin-film structures
+- `mobo.py`: Defining multi-objective Bayesian optimization
+- `plot_bayesian_optimization.py`: Plotting the results of Bayesian optimization over iterations
+- `objective.py`: Defining an objective function
+- `plot_pareto_frontiers.py`: Plotting Pareto frontiers
+- `radio_frequency.py`: Defining a function regarding shiedling effectiveness
+- `visible_light.py`: Defining a function regarding transmittance
 
 ## Required Packages
 
