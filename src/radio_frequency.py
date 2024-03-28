@@ -3,6 +3,8 @@ import numpy as np
 from layerlumos.utils_materials import load_material_RF
 from layerlumos.layerlumos import stackrt0
 
+import constants
+
 
 def calculate_shielding_effectiveness(materials, thicknesses):
     frequencies = np.linspace(8e9, 18e9, 100)
@@ -11,8 +13,9 @@ def calculate_shielding_effectiveness(materials, thicknesses):
     n_Ag = n_k_Ag[:, 1] + 1j * n_k_Ag[:, 2]
 
     n_air = np.ones_like(frequencies)
-    d_air = np.array([0])
-    d_Ag = np.array([2e-8])  # Thickness of SiO2 layer in meters (e.g., 2 microns)
+
+    d_air = constants.THICKNESS_AIR
+    d_Ag = 20 * constants.NANO
 
     n_stack = np.vstack([n_air, n_Ag, n_air]).T
     d_stack = np.vstack([d_air, d_Ag, d_air])
