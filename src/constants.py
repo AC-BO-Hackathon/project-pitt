@@ -21,3 +21,6 @@ MATERIALS = [
     'Ti',
     'W',
 ]
+
+BOUND_MATERIALS = [0, len(MATERIALS) - 0.001]
+BOUND_THICKNESSES = [5, 100]
