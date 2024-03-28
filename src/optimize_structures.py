@@ -84,7 +84,7 @@ if __name__ == '__main__':
         times.append(time_end - time_start)
 
         print('', flush=True)
-        print(f'Iteration {ind_iter+1:04d}: time {time_end - time_start:.4f}', flush=True)
+        print(f'Iteration {ind_iter+1:04d}: transmittance {by[0] * -1.0:.4f} shielding_effectiveness {by[1] * -1.0:.4f} time {time_end - time_start:.4f}', flush=True)
 
     times = np.array(times)
 

@@ -46,10 +46,9 @@ class Objective:
         list_materials = []
         for material in materials:
             list_materials.append(constants.MATERIALS[material])
-        list_materials.append(material_substrate)
         materials = np.array(list_materials)
 
-        assert thicknesses.shape[0] == materials.shape[0] == (self.num_layers + 1)
+        assert thicknesses.shape[0] == materials.shape[0] == self.num_layers
         for material, thickness in zip(materials, thicknesses):
             assert material in constants.MATERIALS
             assert constants.BOUND_THICKNESSES[0] <= thickness
