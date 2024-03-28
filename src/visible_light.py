@@ -8,26 +8,35 @@ import constants
 
 
 def calculate_transparency(materials, thicknesses):
-    TiO2_data = load_material('TiO2')
-    Ag_data = load_material('Ag')
+    assert isinstance(materials, np.ndarray)
+    assert isinstance(thicknesses, np.ndarray)
+    assert materials.ndim == 1
+    assert thicknesses.ndim == 1
+    assert materials.shape[0] == thicknesses.shape[0]
 
-    wavelengths = np.linspace(300 * constants.NANO, 900 * constants.NANO, 100)
+    num_layers = thicknesses.shape[0]
+    num_wavelengths = 100
+
+    wavelengths = np.linspace(
+        constants.WAVELENGTH_START_VISIBLE,
+        constants.WAVELENGTH_END_VISIBLE,
+        num_wavelengths
+    )
     frequencies = convert_frequencies_to_wavelengths(wavelengths)
+    n_k = np.ones((num_wavelengths, num_layers + 2), dtype=np.complex128)
 
-    n_k_TiO2 = interpolate_material(TiO2_data, frequencies)
-    n_TiO2 = n_k_TiO2[:, 0] + 1j * n_k_TiO2[:, 1]
-    n_k_Ag = interpolate_material(Ag_data, frequencies)
-    n_Ag = n_k_Ag[:, 0] + 1j * n_k_Ag[:, 1]
+    for ind_material, material in enumerate(materials):
+        data_material = load_material(material)
+        n_k_material = interpolate_material(data_material, frequencies)
+        n_k[:, ind_material + 1] = n_k_material[:, 0] + 1j * n_k_material[:, 1]
 
-    n_air = np.ones_like(frequencies)
-    d_air = constants.THICKNESS_AIR
-    d_TiO2 = 20 * constants.NANO
-    d_Ag = 10 * constants.NANO
+    thicknesses = np.concatenate([
+        [constants.THICKNESS_AIR],
+        thicknesses * constants.NANO, 
+        [constants.THICKNESS_AIR],
+    ], axis=0)
 
-    n_stack = np.vstack([n_air, n_TiO2, n_Ag, n_TiO2, n_air]).T
-    d_stack = np.array([d_air, d_TiO2, d_Ag, d_TiO2, d_air])
-
-    R_TE, T_TE, R_TM, T_TM = stackrt0(n_stack, d_stack, frequencies)
+    R_TE, T_TE, R_TM, T_TM = stackrt0(n_k, thicknesses, frequencies)
 
     T_avg = (T_TE + T_TM) / 2
     transparency = np.mean(T_avg)
@@ -36,8 +45,14 @@ def calculate_transparency(materials, thicknesses):
 
 
 if __name__ == '__main__':
-    materials = None
-    thicknesses = None
+    thicknesses = np.array([20, 10, 20])
+    materials = np.array(['TiO2', 'Ag', 'TiO2'])
+
+    transparency = calculate_transparency(materials, thicknesses)
+    print(transparency)
+
+    thicknesses = np.array([20, 10, 20, 10, 20, 10, 20 ,10, 20, 10, 20, 10])
+    materials = np.array(['Ag', 'Al2O3', 'Al', 'Cr', 'Ni', 'Pd', 'Si3N4', 'SiO2', 'TiN', 'TiO2', 'Ti', 'W'])
 
     transparency = calculate_transparency(materials, thicknesses)
     print(transparency)

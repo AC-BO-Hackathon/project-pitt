@@ -7,20 +7,23 @@ import constants
 
 
 def calculate_shielding_effectiveness(materials, thicknesses):
-    frequencies = np.linspace(8e9, 18e9, 100)
+    num_layers = thicknesses.shape[0]
+    num_wavelengths = 100
 
-    n_k_Ag = load_material_RF('Ag', frequencies)
-    n_Ag = n_k_Ag[:, 1] + 1j * n_k_Ag[:, 2]
+    frequencies = np.linspace(8e9, 18e9, num_wavelengths)
+    n_k = np.ones((num_wavelengths, num_layers + 2), dtype=np.complex128)
 
-    n_air = np.ones_like(frequencies)
+    for ind_material, material in enumerate(materials):
+        n_k_material = load_material_RF(material, frequencies)
+        n_k[:, ind_material + 1] = n_k_material[:, 1] + 1j * n_k_material[:, 2]
 
-    d_air = constants.THICKNESS_AIR
-    d_Ag = 20 * constants.NANO
+    thicknesses = np.concatenate([
+        [constants.THICKNESS_AIR],
+        thicknesses * constants.NANO, 
+        [constants.THICKNESS_AIR],
+    ], axis=0)
 
-    n_stack = np.vstack([n_air, n_Ag, n_air]).T
-    d_stack = np.vstack([d_air, d_Ag, d_air])
-
-    R_TE, T_TE, R_TM, T_TM = stackrt0(n_stack, d_stack, frequencies)
+    R_TE, T_TE, R_TM, T_TM = stackrt0(n_k, thicknesses, frequencies)
 
     SE_TE = -10 * np.log10(T_TE)
     SE_TM = -10 * np.log10(T_TM)
@@ -31,8 +34,14 @@ def calculate_shielding_effectiveness(materials, thicknesses):
 
 
 if __name__ == '__main__':
-    materials = None
-    thicknesses = None
+    materials = np.array(['Ag'])
+    thicknesses = np.array([20])
+
+    shielding_effectiveness = calculate_shielding_effectiveness(materials, thicknesses)
+    print(shielding_effectiveness)
+
+    thicknesses = np.array([20, 10, 20, 10, 20, 10, 20 ,10, 20, 10, 20, 10])
+    materials = np.array(['Ag', 'Al2O3', 'Al', 'Cr', 'Ni', 'Pd', 'Si3N4', 'SiO2', 'TiN', 'TiO2', 'Ti', 'W'])
 
     shielding_effectiveness = calculate_shielding_effectiveness(materials, thicknesses)
     print(shielding_effectiveness)
