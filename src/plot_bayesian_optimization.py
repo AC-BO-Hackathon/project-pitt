@@ -78,7 +78,7 @@ def get_means_sems(values):
 
 if __name__ == '__main__':
     show_figure = True
-    save_figure = True
+    save_figure = False
 
     for num_layers in num_layerss:
         transparencies_all = []

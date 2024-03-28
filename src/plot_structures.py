@@ -118,9 +118,9 @@ def plot_structure(materials, thicknesses, show_figure, save_figure, str_figure)
     plt.tight_layout()
 
     if save_figure:
-        plt.savefig(os.path.join(path_all, f'{str_figure}.pdf'),
+        plt.savefig(os.path.join(path_figures, f'{str_figure}.pdf'),
             format='pdf', transparent=True, bbox_inches='tight')
-        plt.savefig(os.path.join(path_all, f'{str_figure}.png'),
+        plt.savefig(os.path.join(path_figures, f'{str_figure}.png'),
             format='png', transparent=True, bbox_inches='tight')
 
     if show_figure:
@@ -176,9 +176,12 @@ if __name__ == '__main__':
 
         indices = []
         for ind, pareto in enumerate(pareto_frontier):
-            if pareto[0] >= 0.65 and pareto[1] >= 30:
+            if pareto[0] >= 0.60 and pareto[1] >= 30:
                 indices.append(ind)
         print(len(indices))
+
+        materials_all = materials_all[indices]
+        thicknesses_all = thicknesses_all[indices]
 
         for ind, elem in enumerate(zip(materials_all, thicknesses_all)):
             materials, thicknesses = elem
