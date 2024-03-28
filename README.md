@@ -13,9 +13,17 @@ We investigate the problem of transparent electromagnetic interference shielding
 3. Oliver Hinder (University of Pittsburgh)
 4. Paul W. Leu (University of Pittsburgh)
 
-## Directory Structure
+## Brief Code Description
 
-TBD
+- `constants.py`
+- `optimize_structures.py`
+- `plot_structures.py`
+- `mobo.py`
+- `plot_bayesian_optimization.py`
+- `objective.py`
+- `plot_pareto_frontiers.py`
+- `radio_frequency.py`
+- `visible_light.py`
 
 ## Required Packages
 
