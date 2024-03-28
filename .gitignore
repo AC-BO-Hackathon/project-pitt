@@ -1,5 +1,5 @@
-**/__pycache__/
-.pytest_cache/
-*.pyc
-.coverage
-*.egg-info/
+__pycache__/
+__MACOSX/
+.DS_Store
+*.swp
+outputs/
